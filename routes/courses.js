@@ -57,12 +57,12 @@ router.delete('/:id',(req,res)=>{
 
 
 
-function validateCourse(course)
+function validateCourse(genre)
 {
     const schema = {
         name: Joi.string().min(3).required()
     };
-    return Joi.validate(course, schema) ;
+    return Joi.validate(genre, schema) ;
 }
 
 module.exports=router;

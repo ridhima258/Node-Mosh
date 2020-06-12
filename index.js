@@ -3,14 +3,18 @@ const config=require('config');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const Joi = require('joi');
+const log=require('./middleware/logger');
 const express=require('express');
 const app=express();
 const courses=require('./routes/courses');
+const home=require('./routes/home');
 app.use(express.json()); 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/course',courses);
+app.use('/',home);
+app.use(log);
 
 //Configuration
 console.log('Application Name:'+config.get('name'));
@@ -23,9 +27,7 @@ if(app.get('env') === 'development')
 }
 
 
-app.get('/',(req,res)=>{
-    res.send('Hello World!!!!');
-});
+
 
 
 //PORT
